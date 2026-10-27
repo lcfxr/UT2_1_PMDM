@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.PopupMenu
+import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         // 1. CONECTAR XML CON KOTLIN
         val lvLineas = findViewById<ListView>(R.id.lvLineas)
         val btnAnadir = findViewById<Button>(R.id.btnAnadir)
+        val btnOpciones = findViewById<Button>(R.id.btnOpciones)
 
         // 2. UNIR LOS DATOS CON LA LISTA DE LA PANTALLA
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lineas)
@@ -72,6 +75,27 @@ class MainActivity : AppCompatActivity() {
         btnAnadir.setOnClickListener {
             lanzadorFormulario.launch(Intent(this, FormularioActivity::class.java))
         }
+
+        // 5. BOTÓN OPCIONES: MENÚ CON LA ACCIÓN AYUDA
+        btnOpciones.setOnClickListener { boton ->
+            val menu = PopupMenu(this, boton)
+            menu.menu.add(getString(R.string.menu_ayuda))
+            menu.setOnMenuItemClickListener {
+                mostrarAyuda()
+                true
+            }
+            menu.show()
+        }
+    }
+
+    // VENTANA DE AYUDA: EXPLICA CÓMO USAR LA LISTA
+    private fun mostrarAyuda() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.titulo_ayuda)
+            .setMessage(R.string.texto_ayuda)
+            .setPositiveButton(R.string.btn_entendido, null)
+            .show()
+        Log.d(TAG, "Mostrando ayuda")
     }
 
     //CICLO DE VIDA

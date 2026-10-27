@@ -32,4 +32,12 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_anadir"/>
 
+    <!-- BOTON OPCIONES -->
+    <Button
+        android:id="@+id/btnOpciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_opciones"
+        style="@style/Widget.Material3.Button.OutlinedButton"/>
+
 </LinearLayout>
