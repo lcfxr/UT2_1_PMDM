@@ -11,24 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ACT2_UD1">
+
+        <!-- PANTALLA DE INICIO: LA PRIMERA QUE SE ABRE -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".BienvenidaActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- LISTADO -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- DETALLE -->
         <activity
             android:name=".DetalleActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="false" />
+
+        <!-- FORMULARIO: adjustResize HACE SITIO AL TECLADO -->
         <activity
             android:name=".FormularioActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>
