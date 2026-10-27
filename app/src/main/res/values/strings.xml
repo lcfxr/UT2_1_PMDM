@@ -13,4 +13,15 @@
     <string name="etiqueta_codigo">Código:</string>
     <string name="etiqueta_recorrido">Recorrido:</string>
     <string name="btn_volver">Volver</string>
+
+    <!-- FORMULARIO -->
+    <string name="titulo_formulario">Nueva línea</string>
+    <string name="hint_codigo">Ej: M-111</string>
+    <string name="hint_recorrido">Ej: Sevilla – Bormujos</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="btn_cancelar">Cancelar</string>
+
+    <!-- ERRORES -->
+    <string name="error_codigo_corto">El código debe tener al menos 2 caracteres</string>
+    <string name="error_recorrido_vacio">El recorrido es obligatorio</string>
 </resources>

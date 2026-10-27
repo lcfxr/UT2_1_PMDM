@@ -6,6 +6,8 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
+import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +23,27 @@ class MainActivity : AppCompatActivity() {
     // ADAPTADOR: CONVIERTE CADA LÍNEA EN UNA FILA (SE CREA EN onCreate)
     private lateinit var adapter: ArrayAdapter<Linea>
 
+    // LANZADOR DEL FORMULARIO: LO ABRE Y ESPERA LA LÍNEA NUEVA
+    private val lanzadorFormulario = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { resultado ->
+        if (resultado.resultCode == RESULT_OK) {
+            // RECOGER LOS DATOS QUE DEVUELVE EL FORMULARIO
+            val codigo = resultado.data?.getStringExtra(FormularioActivity.EXTRA_CODIGO).orEmpty()
+            val recorrido = resultado.data?.getStringExtra(FormularioActivity.EXTRA_RECORRIDO).orEmpty()
+
+            // ID NUEVO = EL MAYOR QUE HAYA + 1
+            val nuevoId = (lineas.maxOfOrNull { it.id } ?: 0) + 1
+
+            // AÑADIR A LA LISTA Y AVISAR AL ADAPTADOR PARA QUE SE VEA
+            lineas.add(Linea(nuevoId, codigo, recorrido))
+            adapter.notifyDataSetChanged()
+            Log.d(TAG, "Línea añadida: $codigo (id $nuevoId)")
+        } else {
+            Log.d(TAG, "Formulario cancelado")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         // 1. CONECTAR XML CON KOTLIN
         val lvLineas = findViewById<ListView>(R.id.lvLineas)
+        val btnAnadir = findViewById<Button>(R.id.btnAnadir)
 
         // 2. UNIR LOS DATOS CON LA LISTA DE LA PANTALLA
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lineas)
@@ -42,6 +66,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(DetalleActivity.EXTRA_RECORRIDO, linea.recorrido)
             Log.d(TAG, "Abriendo detalle de ${linea.codigo}")
             startActivity(intent)
+        }
+
+        // 4. BOTÓN AÑADIR: ABRIR EL FORMULARIO
+        btnAnadir.setOnClickListener {
+            lanzadorFormulario.launch(Intent(this, FormularioActivity::class.java))
         }
     }
 
