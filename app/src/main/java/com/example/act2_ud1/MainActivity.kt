@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,16 @@ class MainActivity : AppCompatActivity() {
         // 2. UNIR LOS DATOS CON LA LISTA DE LA PANTALLA
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lineas)
         lvLineas.adapter = adapter
+
+        // 3. AL TOCAR UNA LÍNEA, ABRIR EL DETALLE CON SUS DATOS
+        lvLineas.setOnItemClickListener { _, _, position, _ ->
+            val linea = lineas[position]
+            val intent = Intent(this, DetalleActivity::class.java)
+            intent.putExtra(DetalleActivity.EXTRA_CODIGO, linea.codigo)
+            intent.putExtra(DetalleActivity.EXTRA_RECORRIDO, linea.recorrido)
+            Log.d(TAG, "Abriendo detalle de ${linea.codigo}")
+            startActivity(intent)
+        }
     }
 
     //CICLO DE VIDA

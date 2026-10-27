@@ -7,4 +7,10 @@
     <!-- PARA AÑADIR LAS LISTAS -->
     <string name="titulo_listado">Líneas de autobús</string>
     <string name="btn_anadir">Añadir línea</string>
+
+    <!-- DETALLE -->
+    <string name="titulo_detalle">Detalle de la línea</string>
+    <string name="etiqueta_codigo">Código:</string>
+    <string name="etiqueta_recorrido">Recorrido:</string>
+    <string name="btn_volver">Volver</string>
 </resources>
