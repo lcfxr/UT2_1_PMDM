@@ -2,13 +2,23 @@ package com.example.act2_ud1
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "PMDM"
+
+    // LISTA DE LÍNEAS (MUTABLE PARA PODER AÑADIR MÁS)
+    private val lineas = mutableListOf(
+        Linea(1, "M-163", "Sevilla – Hospital San Juan"),
+        Linea(2, "M-160", "Sevilla – Camas"),
+        Linea(3, "M-140", "Sevilla – Santiponce")
+    )
+
+    // ADAPTADOR: CONVIERTE CADA LÍNEA EN UNA FILA (SE CREA EN onCreate)
+    private lateinit var adapter: ArrayAdapter<Linea>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,14 +27,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Estado: onCreate - La app se está creando")
 
         // 1. CONECTAR XML CON KOTLIN
-        val textoMensaje = findViewById<TextView>(R.id.mensaje)
-        val botonAccion = findViewById<Button>(R.id.btnAccion)
+        val lvLineas = findViewById<ListView>(R.id.lvLineas)
 
-        // 2. CAPTURAR EVENTO
-        botonAccion.setOnClickListener {
-            textoMensaje.text = getString(R.string.mensaje_actualizado)
-            Log.d(TAG, "¡TODO EN ORDEN!")
-        }
+        // 2. UNIR LOS DATOS CON LA LISTA DE LA PANTALLA
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lineas)
+        lvLineas.adapter = adapter
     }
 
     //CICLO DE VIDA
