@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">TUPESA</string>
+    <string name="mensaje_inicial">Bienvenido a TUPESA</string>
+    <string name="accion_boton">Registrar ruta</string>
+    <string name="mensaje_actualizado">¡RUTA REGISTRADA!</string>
+</resources>
