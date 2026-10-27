@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:layout_margin="16dp"
     android:fitsSystemWindows="true">
 
     <!-- TITULO -->
@@ -24,14 +24,13 @@
         android:text="@string/etiqueta_codigo"
         android:textStyle="bold"/>
 
+    <!-- VALOR DEL CODIGO -->
     <TextView
         android:id="@+id/tvCodigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="16dp"
         android:layout_marginBottom="16dp"/>
-
 
     <!-- VALOR DE RECORRIDO -->
     <TextView
